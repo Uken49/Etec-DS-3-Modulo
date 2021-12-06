@@ -1,0 +1,103 @@
+USE bdEscola
+
+/* 1 - Crie uma função que informada uma data da matrícula , retorne o dia da semana.*/
+
+CREATE function fcDiaSemana(@Data DATE)
+	RETURN VARCHAR(40) AS
+BEGIN
+	Declare @DiaSemana VARCHAR(40)
+	Declare @Dia int
+
+	set @Dia = DATEPART(dw, @Data)
+	IF @Dia = 1
+		BEGIN
+			SET @DiaSemana = 'Domingo'
+	END
+	IF @Dia = 2
+		BEGIN
+			SET @DiaSemana = 'Segunda-Feira'
+	END
+	IF @Dia = 3
+		BEGIN
+			SET @DiaSemana = 'Terça-Feira'
+	END
+	IF @Dia = 4
+		BEGIN
+			SET @DiaSemana = 'Quarta-Feira'
+	END
+	IF @Dia = 5
+		BEGIN
+			SET @DiaSemana = 'Quinta-Feira'
+	END
+	IF @Dia = 6
+		BEGIN
+			SET @DiaSemana = 'Sexta-Feira'
+	END
+	IF @Dia = 7
+		BEGIN
+			SET @DiaSemana = 'Sabado'
+	END
+	RETURN @DiaSemana
+END
+
+SELECT * FROM tbMatricula
+
+SELECT DataMatricula=dbo.fcDiaSemana('24/02/2004')
+
+
+
+/* 2 - Crie uma função que de acordo com a carga horária do curso exiba curso rápido ou curso extenso. (Rápido menos de 1000 horas).*/
+SELECT * FROM tbCurso
+	CREATE FUNCTION fcCargaHoraria(@CargaH INT)
+RETURN VARCHAR(40) AS
+BEGIN
+	DECLARE @R_E VARCHAR(30)
+
+	IF @CargaH < 1000
+		BEGIN
+			SET @R_E = 'Curso Rapido'
+	END
+	ELSE
+	if @CargaH >= 1000
+		BEGIN
+			SET @R_E = 'Curso Extenso'
+	END
+RETURN @R_E
+END
+
+SELECT DataMatricula=dbo.fcCargaHoraria(100)
+
+/* 3 - Crie uma função que de acordo com o valor do curso exiba  curso caro ou curso barato. (Curso caro acima de 400).*/
+SELECT * FROM tbCurso
+
+CREATE FUNCTION fcValorCurso(@ValorC INT)
+	RETURN VARCHAR(40) AS
+BEGIN
+	DECLARE @C_B VARCHAR(30)
+IF @ValorC < 400
+	BEGIN
+		SET @C_B = 'Curso Barato'
+	END
+	ELSE
+		IF @ValorC >= 400
+	BEGIN
+		SET @C_B = 'Curso Caro'
+	END
+RETURN @C_B
+END
+
+SELECT DataMatricula=dbo.fcValorCurso(450)
+
+/*4 - Criar uma função que informada a data da matrícula converta-a no formato dd/mm/aaaa.*/
+
+ALTER FUNCTION fcConvertData(@data date)
+RETURN VARCHAR(40) AS
+BEGIN
+	DECLARE @datas Varchar(40)
+
+	SET @datas = CONVERT(VARCHAR, @data, 106)
+
+	RETURN @datas
+END
+
+SELECT DataConvertida=dbo.fcConvertData('24/02/2004')

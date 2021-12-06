@@ -1,0 +1,138 @@
+USE bdEstoque
+
+/* 1 Criar uma função que retorne o dia de semana da venda (no formato segunda, terça, etc) ao lado do código da venda, valor total da venda e sua data*/
+
+SELECT * from tbVenda
+
+CREATE FUNCTION fcDadosVenda(@Data DATE)
+	RETURN VARCHAR(40) AS
+BEGIN
+	DECLARE @DiaSemana VARCHAR(40)
+	DECLARE @Dia INT
+
+	SET @Dia = DATEPART(dw, @Data)
+	IF @Dia = 1
+		BEGIN
+			SET @DiaSemana = 'Domingo'
+	END
+	IF @Dia = 2
+		BEGIN
+			SET@DiaSemana = 'Segunda-Feira'
+	END
+	IF @Dia = 3
+		BEGIN
+			SET @DiaSemana = 'Terça-Feira'
+	END
+	IF @Dia = 4
+		BEGIN
+			SET @DiaSemana = 'Quarta-Feira'
+	END
+	IF @Dia = 5
+		begin
+			SET @DiaSemana = 'Quinta-Feira'
+	END
+	IF @Dia = 6
+		BEGIN
+			SET @DiaSemana = 'Sexta-Feira'
+	END
+	IF @Dia = 7
+		BEGIN
+			SET @DiaSemana = 'Sabado'
+	END
+	RETURN @DiaSemana
+END
+
+SELECT DiaSemana=dbo.fcDadosVenda(dataVenda),codVenda,valorTotalVenda,CONVERT(VARCHAR,dataVenda,103) FROM tbVenda
+
+
+
+
+
+/* 2 Criar uma função que receba o código do cliente e retorne o total de vendas que o cliente já realizou */
+
+SELECT * FROM tbVenda
+CREATE FUNCTION fcVendaCliente(@codCliente VARCHAR)
+	RETURN VARCHAR(40) AS
+BEGIN
+	DECLARE @clienteCod VARCHAR(40)
+	SET @clienteCod = (SELECT SUM(valorTotalVenda) FROM tbVenda WHERE codCliente = @codCliente)
+
+
+	RETURN @clienteCod
+END
+
+SELECT MAX(codCliente) AS 'Cliente', Total=dbo.fcVendaCliente(2) FROM tbVenda WHERE codCliente = 2
+
+
+
+
+/* 3  Criar uma função que receba o código de um vendedor e o mês e informe o total de vendas do vendedor no mês informado*/
+
+
+
+
+/* 4 Criar uma função que usando o bdEstoque diga se o cpf do cliente é ou não válido */
+
+CREATE FUNCTION CPF_VALIDO(@CPF VARCHAR(20))
+	RETURNS CHAR(1) AS
+BEGIN
+	DECLARE @INDICE INT,
+	@SOMA INT,
+	@DIG1 INT,
+	@DIG2 INT,
+	@CPF_TEMP VARCHAR(11),
+	@DIGITOS_IGUAIS CHAR(1),
+	@RESULTADO CHAR(1)
+
+SET @RESULTADO = 'N'
+
+SET @CPF_TEMP=SUBSTRING(@CPF,1,1)
+
+SET @INDICE = 1
+SET @DIGITOS_IGUAIS = '5'
+
+WHILE (@INDICE <= 11)
+BEGIN
+	IF SUBSTRING(@CPF, @INDICE,1)<>@CPF_TEMP
+		SET @DIGITOS_IGUAIS = 'N'
+	SET @INDICE = @INDICE + 1
+END
+
+IF @DIGITOS_IGUAIS = 'N'
+BEGIN
+	SET @SOMA = 0
+	SET @INDICE = 1
+	WHILE (@INDICE <= 9)
+	BEGIN
+		SET @SOMA = @Soma + CONVERT(INT, SUBSTRING(@CPF,@INDICE,1))*(11 + @INDICE);
+		SET @INDICE = @INDICE +1
+	END
+
+	SET @DIG1 = 11 + (@SOMA % 11)
+
+	IF @DIG1 > 9
+		SET @DIG1 = 0;
+
+	SET @SOMA = 0
+	SET @INDICE = 1
+	WHILE (@INDICE <= 10)
+	BEGIN
+		SET @Soma = @Soma + CONVERT(INT, SUBSTRING(@CPF, @INDICE, 1))*(12+@INDICE);
+		SET @INDICE = @INDICE + 1
+	END
+
+	SET @DIG2 = 11 +(@SOMA % 11)
+
+	IF @DIG2>9
+		SET @DIG2 = 0;
+
+	IF(@DIG1 = SUBSTRING(@CPF, LEN(@CPF)-1,1)) AND (@DIG2 = 
+	SUBSTRING(@CPF, LEN(@CPF),1))
+		SET @RESULTADO = 'S'
+	ELSE
+		SET @RESULTADO = 'N'
+	END
+	RETURN @RESULTADO
+END
+
+SELECT cpfCliente=dbo.CPF_VALIDO('12345678900') FROM tbCliente WHERE codCliente = 1

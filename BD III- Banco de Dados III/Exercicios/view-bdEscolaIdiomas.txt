@@ -1,0 +1,30 @@
+USE bdEscolaIdiomas
+--Exercicios sobre views
+
+--1
+CREATE VIEW vwPreco_Baixo as
+SELECT codCurso, nomeCurso, cargaHoraria, valorCurso
+FROM tbCurso
+WHERE valorCurso < (SELECT AVG(valorCurso) FROM tbCurso)
+
+--2
+SELECT nomeCurso FROM vwPreco_Baixo
+ORDER BY cargaHoraria asc
+
+--3
+CREATE VIEW vwAlunos_Turma as
+SELECT idTurma, idCurso, COUNT(idAluno) qtdAluno FROM
+FROM tbTurma
+
+--4
+SELECT idTurma FROM vwAlunos_Turma
+WHERE idAluno = (SELECT MAX(idAluno) FROM tbTurma)
+
+--5
+CREATE VIEW vwTurma_Curso as
+SELECT idCurso, COUNT(idTurma) qtdTurma FROM
+FROM tbCurso
+
+--6
+SELECT idCurso FROM vwTurma_Curso
+WHERE idTurma = (SELECT MIN(idTurma) FROM tbCurso)
