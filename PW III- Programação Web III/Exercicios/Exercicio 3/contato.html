@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Contato</title>
+    </head>
+    
+    <body>
+
+        <section>
+            <form action="">
+                <div style="margin-left: 2%">
+                        <div style="margin-top: 1%">
+                        <label>Nome:</label><br>
+                        <input type="text" id="txNome" placeholder="Everton Camargo dos Santos">
+                        <br>
+                    </div>
+                    
+                    <div style="margin-top: 1%">
+                        <label>Email:</label><br>
+                        <input type="text" id="txEmail" placeholder="everton123@gmail.com">
+                    </div>
+                    
+                    <div style="margin-top: 1%">
+                        <label>Assunto:</label ><br>
+                        <input type="text" id="txAssunto" placeholder="Problemas na compra">
+                        <br>
+                    </div>
+                    
+                    <div style="margin-top: 1%">
+                        <label>Mensagem:</label><br>
+                        <textarea id="txMensagem" cols="90" rows="30" style="resize: none"></textarea>
+                    </div>
+                    <!--
+                    <div>
+                        <input type="submit" value="Enviar" onclick="visualizarDados()">
+                    </div>
+                    -->
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <p id="resultado"></p>
+        </section>
+
+        <button type="reset" onclick="visualizarDados()">Enviar</button>
+
+        <script>
+            function visualizarDados(){
+
+            var nome = document.getElementById("txNome").value;
+            var email = document.getElementById("txEmail").value;
+            var assunto = document.getElementById("txAssunto").value;
+            var mensagem = document.getElementById("txMensagem").value;
+
+                //alert(nome);
+                document.getElementById("resultado").innerHTML="Nome: "+nome+
+                                                            "<br>Email: "+email+
+                                                            "<br>Assunto: "+assunto+
+                                                            "<br>Mensagem: "+mensagem;
+                                                            
+                document.getElementById("resultado").style.background="red"; color="blue" ; padding="7px 11px";borderRadius="9px";
+
+            }
+        </script>
+    </body>
+</html>

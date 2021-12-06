@@ -1,0 +1,5 @@
+1-Comente sobre internacionalização:
+R: A internacionalização permite que o código atinja mais úsuarios,pois com a ampliação de idioma, é possível atingir pessoas de outros países se adequando a cultura do país por meio da língua.
+
+2-Comente sobre segurança:
+R: A segurança de dados enviados pelo site para o banco de dados,devem ser criptografados para evitar que informações sejam roubadas por alguém que consiga acessar o mesmo.

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Aloha imóveis - Cadastro</title>
+        <style>
+            .flex {
+                display: flex;
+                align-content: center;
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
+        
+            .grid {
+                display: grid;
+                justify-items: center;
+                grid-template-columns: 500px 500px;
+                grid-template-columns: repeat(2, 43.33%);
+                gap: 5%;
+                border: double;
+                padding: 5%;
+                border-color: black;
+            }
+        </style>
+    </head>
+
+    <body> <!-- Formulário - Inicio -->
+        <section>
+            <form action="" onsubmit="return validarTudo()">
+                <main class="flex">
+                    <section class="grid">
+                        <div>
+                            <label>Usuário:</label>
+                            <input type="text" id="txNome">
+                        </div>
+                        <div>
+                            <label>Senha:</label>
+                            <input type="password" id="txSenha">
+                        </div>
+                        <div>
+                            <label>Confimar senha:</label>
+                            <input type="password" id="txSenhaConfirmacao">
+                        </div>
+                
+                        <input type="submit">
+                    </section>
+                </main>
+            </form>
+        </section> <!-- Formulário - Fim -->
+
+        <script>
+            function validarNome(){
+                var nome = document.getElementById("txNome").value;
+                
+                if(nome.length>0){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            function validarSenha(){
+                var senha = document.getElementById("txSenha").value;
+                var senhaConfirmar = document.getElementById("txSenhaConfirmacao").value;
+
+                if (senha.length>0 && senha==senhaConfirmar ) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+            function validarTudo(){
+                if(validarNome() && validarSenha()){
+                    
+                    alert("Dados enviados com Sucesso!!");
+                    return true;
+                }
+                else{
+                    alert("Erro ao enviar!!");
+                    return false;
+                }
+            }
+        </script>
+
+    </body>
+
+</html>
