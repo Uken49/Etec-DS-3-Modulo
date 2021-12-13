@@ -1,8 +1,9 @@
 # Etec-DS
 Etec de Guaianazes - Curso de DS - 3° Módulo - 2° Semestre 2021
 
-  ►Olá!! Eu me chamo Helder e atualmente eu concluí o curso de Desenvolvimento de Sistemas na Etec de Guaianazes.                               
-  ►Neste repositório exibirei os meus últimos trabalhos e exercícios feitos no 3°(terceiro) Módulo deste curso.                                     
+  ►Olá!! Eu me chamo Helder e atualmente eu concluí o curso de Desenvolvimento de Sistemas na Etec de Guaianazes.<br>
+  ►Neste repositório exibirei os meus últimos trabalhos e exercícios feitos no 3°(terceiro) Módulo deste curso.<br>
+  ►O projeto de TCC está no seguinte repositório:<a href="https://github.com/Uken49/TCC-Facilita"> TCC-Facilita+</a>
 <div>
   <a href="https://www.facebook.com/OAnciao"><img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white"></a>
    <a href="mailto:heldergavioes@hotmail.com"><img src="https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white"" target="_blank"></a>
